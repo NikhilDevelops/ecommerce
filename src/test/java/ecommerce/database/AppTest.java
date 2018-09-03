@@ -155,7 +155,7 @@ public class AppTest {
 	public void updateVendor()
 	{
 		vendorDaoService.addVendor(vendor);
-		
+		vendor.setVendor_name("raghu");
 		assertEquals("Test Vendor Updation Failed",true,vendorDaoService.editVendor(vendor));
 	}
 	

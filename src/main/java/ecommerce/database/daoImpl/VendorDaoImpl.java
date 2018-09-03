@@ -2,6 +2,7 @@ package ecommerce.database.daoImpl;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +71,27 @@ public class VendorDaoImpl implements VendorDaoService{
 	public Vendor getVendorByEmail(String vendor_email) {
 		// TODO Auto-generated method stub
 		try {
-			return (Vendor)sessionFactory.getCurrentSession().get(Vendor.class,vendor_email);
+			return (Vendor)sessionFactory.getCurrentSession().createQuery("from Vendor where vendor_email=:email").setParameter("email", vendor_email).getSingleResult();
+			
 			
 			} catch (HibernateException e) {
 				// TODO: handle exception
 				return null;
 			}
 		
+	}
+	
+	@Override
+	public Vendor vendorLogin(String vendor_email,String vendor_password) {
+		
+		try {
+			System.out.println(vendor_email+" "+vendor_password);
+		return sessionFactory.getCurrentSession().createQuery("from Vendor where vendor_email=:email and vendor_password=:password",Vendor.class).setParameter("email",vendor_email).setParameter("password", vendor_password).getSingleResult();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 	
 	

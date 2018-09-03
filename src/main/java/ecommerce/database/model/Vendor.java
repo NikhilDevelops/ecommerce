@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,13 +38,13 @@ public class Vendor {
 	@Column(unique=true)
     private String company_name;
     
-    @OneToMany(mappedBy="vendor")
+    @OneToMany(mappedBy="vendor",fetch=FetchType.EAGER)
     private Set<VendorAddress> addresses;
     
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.EAGER)
     private Set<VendorAccountDetails> accountDetails;
 	
-	@OneToMany(mappedBy="vendor")
+	@OneToMany(mappedBy="vendor",fetch=FetchType.EAGER)
 	private List<Product> products;
 	
 	public long getVendor_id() {
